@@ -28,7 +28,6 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        // kita akan melakukan validasi setiap data yang diinputkan
         $request->validate([
             'name_product' => 'required|min:4|max:20',
             'stock_product' => 'required|integer|min:0',
@@ -47,16 +46,14 @@ class ProductController extends Controller
             'desc_product.required' => 'Deskripsi produk wajib diisi.',
         ]);
 
-        // kita tambahkan data yang diinputkan ke dalam database
         Product::create([
             'name_product' => $request->name_product,
             'stock_product' => $request->stock_product,
             'price_product' => $request->price_product,
             'desc_product' => $request->desc_product,
-            'id_category' => rand(1,3), // kita gunakan fungsi random untuk menambahkan category
+            'id_category' => rand(1,3), 
         ]);
 
-        // kita akan memberikan pesan ketika data berhasil diinputkan
         return redirect('/product')->with('message','Data Berhasil Ditambahkan');
     }
 
